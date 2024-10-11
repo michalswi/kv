@@ -116,13 +116,13 @@ resource "azurerm_key_vault_access_policy" "this" {
   object_id    = azurerm_user_assigned_identity.this.principal_id
 
   secret_permissions = [
-    "get",
-    "list",
+    "Get",
+    "List",
   ]
 
   certificate_permissions = [
-    "get",
-    "list",
+    "Get",
+    "List",
   ]
 }
 

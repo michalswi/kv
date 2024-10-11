@@ -1,6 +1,6 @@
 ```
 locals {
-  location         = "East US"
+  location = "East US"
   tags = {
     Environment = "dev"
     Project     = "dev"
@@ -27,10 +27,10 @@ resource "azurerm_resource_group" "kv_rg" {
 module "key_vault" {
   source = "git::git@github.com:michalswi/kv.git?ref=main"
 
-  location = local.location
-  rg_name = azurerm_resource_group.kv_rg.name
+  location                   = local.location
+  rg_name                    = azurerm_resource_group.kv_rg.name
   log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
-  tags = local.tags
+  tags                       = local.tags
 
   # todo - change to 'true' for prod
   purge_protection_enabled = false
