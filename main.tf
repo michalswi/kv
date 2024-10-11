@@ -5,6 +5,7 @@ locals {
   rg_name                    = var.rg_name
   log_analytics_workspace_id = var.log_analytics_workspace_id
   sku_name                   = var.sku_name
+  enable_logs                = var.enable_logs
 
   enabled_for_deployment          = var.enabled_for_deployment
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
@@ -17,6 +18,8 @@ data "azurerm_client_config" "current" {}
 
 # diagnostic settings
 resource "azurerm_monitor_diagnostic_setting" "this" {
+  count = local.enable_logs == "true" ? 1 : 0
+
   name                       = "${local.name}-diag"
   target_resource_id         = azurerm_key_vault.this.id
   log_analytics_workspace_id = local.log_analytics_workspace_id

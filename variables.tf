@@ -21,6 +21,12 @@ variable "rg_name" {
   default     = ""
 }
 
+variable "enable_logs" {
+  description = "Enable Azure Monitor diagnostics."
+  type        = bool
+  default     = true
+}
+
 variable "log_analytics_workspace_id" {
   description = "Log Analytics workspace id."
   type        = string
