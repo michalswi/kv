@@ -7,7 +7,7 @@ variable "tags" {
 variable "name" {
   description = "Key Vault name."
   type        = string
-  default     = "1ad-kv"
+  default     = "oneadkv"
 }
 
 variable "location" {

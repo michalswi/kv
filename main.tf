@@ -90,19 +90,6 @@ resource "azurerm_key_vault" "this" {
 #   key_vault_id = azurerm_key_vault.this.id
 # }
 
-# RBAC
-resource "azurerm_role_assignment" "secrets" {
-  scope                = azurerm_key_vault.this.id
-  role_definition_name = "Key Vault Secrets"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
-
-resource "azurerm_role_assignment" "certifcates" {
-  scope                = azurerm_key_vault.this.id
-  role_definition_name = "Key Vault Certificates"
-  principal_id         = data.azurerm_client_config.current.object_id
-}
-
 # Managed Identity
 resource "azurerm_user_assigned_identity" "this" {
   name                = "${local.name}-mi"
@@ -124,6 +111,19 @@ resource "azurerm_key_vault_access_policy" "this" {
     "Get",
     "List",
   ]
+}
+
+# RBAC
+resource "azurerm_role_assignment" "secrets_officer" {
+  scope                = azurerm_key_vault.this.id
+  role_definition_name = "Key Vault Secrets Officer"
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_role_assignment" "certifcates_officer" {
+  scope                = azurerm_key_vault.this.id
+  role_definition_name = "Key Vault Certificates Officer"
+  principal_id         = data.azurerm_client_config.current.object_id
 }
 
 # todo
