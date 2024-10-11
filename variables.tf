@@ -1,11 +1,12 @@
 variable "tags" {
-  description = "Tags to apply to the Application Gateway."
+  description = "List of the Key Vault tags."
   type        = map(string)
   default     = {}
 }
 
 variable "name" {
   description = "Key Vault name."
+  type        = string
   default     = "1ad-kv"
 }
 
