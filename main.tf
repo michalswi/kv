@@ -92,7 +92,7 @@ resource "azurerm_key_vault" "this" {
 
 # Managed Identity
 resource "azurerm_user_assigned_identity" "this" {
-  name                = "${local.name}-mi"
+  name                = "${local.name}-${local.rg_name}-mi"
   resource_group_name = local.rg_name
   location            = local.location
 }
