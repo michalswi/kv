@@ -8,7 +8,7 @@ locals {
 }
 
 resource "azurerm_resource_group" "kv_rg" {
-  name     = "<name>"
+  name     = "test"
   location = local.location
   tags     = local.tags
 }
@@ -27,16 +27,17 @@ resource "azurerm_resource_group" "kv_rg" {
 module "key_vault" {
   source = "git::git@github.com:michalswi/kv.git?ref=main"
 
-  location                   = local.location
-  rg_name                    = azurerm_resource_group.kv_rg.name
-  log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
-  tags                       = local.tags
+  location = local.location
+  rg_name  = azurerm_resource_group.kv_rg.name
+  tags     = local.tags
+
+  # log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
+  # OR >> todo, remove later on
+  log_analytics_workspace_id = ""
+  enable_logs                = false
 
   # todo - change to 'true' for prod
   purge_protection_enabled = false
-
-  # todo - remove later on
-  enable_logs = false
 
   # [optional] - [default]
   # enabled_for_deployment - false
