@@ -10,6 +10,11 @@ output "key_vault_name" {
   value = azurerm_key_vault.this.name
 }
 
-output "this" {
-  value = azurerm_key_vault.this
+output "azurerm_user_assigned_identity_id" {
+  value = azurerm_user_assigned_identity.this.id
 }
+
+# todo
+# output "azurerm_key_vault_certificate_id" {
+#   value = azurerm_key_vault_certificate.ag_cert.id
+# }

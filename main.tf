@@ -81,6 +81,12 @@ resource "azurerm_key_vault" "this" {
   tags = local.tags
 }
 
+# resource "azurerm_key_vault_secret" "secret" {
+#   name         = "secretname"
+#   value        = "secretvalue"
+#   key_vault_id = azurerm_key_vault.this.id
+# }
+
 # RBAC
 resource "azurerm_role_assignment" "secrets" {
   scope                = azurerm_key_vault.this.id
@@ -94,8 +100,28 @@ resource "azurerm_role_assignment" "certifcates" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-resource "azurerm_key_vault_secret" "secret" {
-  name         = "secretname"
-  value        = "secretvalue"
-  key_vault_id = azurerm_key_vault.this.id
+# Managed Identity
+resource "azurerm_user_assigned_identity" "this" {
+  name                = "${local.name}-mi"
+  resource_group_name = local.rg_name
+  location            = local.location
 }
+
+resource "azurerm_key_vault_access_policy" "this" {
+  key_vault_id = azurerm_key_vault.this.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_user_assigned_identity.this.principal_id
+
+  secret_permissions = [
+    "get",
+    "list",
+  ]
+
+  certificate_permissions = [
+    "get",
+    "list",
+  ]
+}
+
+# todo
+# resource "azurerm_key_vault_certificate" "ag_cert" {}
