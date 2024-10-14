@@ -33,8 +33,7 @@ module "key_vault" {
 
   # log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
   # OR >> todo, remove later on
-  log_analytics_workspace_id = ""
-  enable_logs                = false
+  enable_logs = false
 
   # todo - change to 'true' for prod
   purge_protection_enabled = false

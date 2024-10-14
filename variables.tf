@@ -1,11 +1,11 @@
 variable "tags" {
-  description = "List of the Key Vault tags."
+  description = "List of tags."
   type        = map(string)
   default     = {}
 }
 
 variable "name" {
-  description = "Key Vault name."
+  description = "Resource name prefix."
   type        = string
   default     = "oneadkv"
 }
@@ -30,6 +30,7 @@ variable "enable_logs" {
 variable "log_analytics_workspace_id" {
   description = "Log Analytics workspace id."
   type        = string
+  default     = ""
 }
 
 variable "sku_name" {
@@ -67,3 +68,10 @@ variable "purge_protection_enabled" {
   type        = bool
   default     = true
 }
+
+# network_acls
+# variable "allowed_subnet_ids" {
+#   description = "Specifies which subnet_id can bypass the network rules."
+#   type = list(string)
+#   default = []
+# }
