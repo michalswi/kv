@@ -49,7 +49,7 @@ resource "azurerm_key_vault" "this" {
   purge_protection_enabled        = local.purge_protection_enabled
 
   # network_acls
-  # public_network_access_enabled = false
+  public_network_access_enabled = false
   # network_acls {
   #   bypass         = "AzureServices"
   #   default_action = "Allow"
