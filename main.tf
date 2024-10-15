@@ -47,7 +47,6 @@ resource "azurerm_key_vault" "this" {
   enable_rbac_authorization       = local.enable_rbac_authorization
   purge_protection_enabled        = local.purge_protection_enabled
 
-  # todo - set 'false'
   public_network_access_enabled = true
   # network_acls {
   #   bypass         = "AzureServices"
