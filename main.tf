@@ -16,7 +16,6 @@ locals {
 
 data "azurerm_client_config" "current" {}
 
-# diagnostic settings
 resource "azurerm_monitor_diagnostic_setting" "this" {
   count = local.enable_logs == "true" ? 1 : 0
 
@@ -59,29 +58,6 @@ resource "azurerm_key_vault" "this" {
   # }
 
   tags = local.tags
-}
-
-# Managed Identity
-resource "azurerm_user_assigned_identity" "this" {
-  name                = "${local.name}-${local.rg_name}-mi"
-  resource_group_name = local.rg_name
-  location            = local.location
-}
-
-resource "azurerm_key_vault_access_policy" "this" {
-  key_vault_id = azurerm_key_vault.this.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_user_assigned_identity.this.principal_id
-
-  secret_permissions = [
-    "Get",
-    "List",
-  ]
-
-  certificate_permissions = [
-    "Get",
-    "List",
-  ]
 }
 
 # RBAC

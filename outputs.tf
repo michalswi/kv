@@ -10,9 +10,9 @@ output "key_vault_uri" {
   value = azurerm_key_vault.this.vault_uri
 }
 
-output "azurerm_user_assigned_identity_id" {
-  value = azurerm_user_assigned_identity.this.id
-}
+# output "azurerm_user_assigned_identity_id" {
+#   value = azurerm_user_assigned_identity.this.id
+# }
 
 # todo
 # output "azurerm_key_vault_certificate_id" {
