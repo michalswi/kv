@@ -48,8 +48,8 @@ resource "azurerm_key_vault" "this" {
   enable_rbac_authorization       = local.enable_rbac_authorization
   purge_protection_enabled        = local.purge_protection_enabled
 
-  # network_acls
-  public_network_access_enabled = false
+  # todo - set 'false'
+  public_network_access_enabled = true
   # network_acls {
   #   bypass         = "AzureServices"
   #   default_action = "Allow"
@@ -100,9 +100,9 @@ resource "azurerm_role_assignment" "certifcates_officer" {
 # todo
 # resource "azurerm_key_vault_certificate" "ag_cert" {}
 
-# todo
-# resource "azurerm_key_vault_secret" "secret" {
-#   name         = "secretname"
-#   value        = "secretvalue"
-#   key_vault_id = azurerm_key_vault.this.id
-# }
+# todo - toremove
+resource "azurerm_key_vault_secret" "secret" {
+  name         = "secretname"
+  value        = "secretvalue"
+  key_vault_id = azurerm_key_vault.this.id
+}
