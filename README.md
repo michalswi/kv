@@ -31,15 +31,14 @@ module "key_vault" {
   rg_name  = azurerm_resource_group.kv_rg.name
   tags     = local.tags
 
+  retention_days = 7
+
   # log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
   # OR >> todo, remove later on
   enable_logs = false
 
   # todo - change to 'true' for prod
   purge_protection_enabled = false
-
-  # todo - set number
-  retention_days = 0
 
   # [optional] - [default]
   # enabled_for_deployment - false
