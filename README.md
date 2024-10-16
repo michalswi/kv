@@ -38,6 +38,9 @@ module "key_vault" {
   # todo - change to 'true' for prod
   purge_protection_enabled = false
 
+  # todo - set number
+  retention_days = 0
+
   # [optional] - [default]
   # enabled_for_deployment - false
   # enabled_for_disk_encryption - false

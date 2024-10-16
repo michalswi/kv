@@ -16,7 +16,7 @@ variable "location" {
 }
 
 variable "rg_name" {
-  description = "The name of an existing resource group to create the Key Vault in."
+  description = "The name of an existing resource group to create the resource in."
   type        = string
   default     = ""
 }
@@ -36,7 +36,7 @@ variable "log_analytics_workspace_id" {
 variable "sku_name" {
   description = "Specifies whether the Key Vault is standard or premium vault."
   type        = string
-  default     = "standard"
+  default     = "premium"
 }
 
 variable "enabled_for_deployment" {
@@ -67,6 +67,11 @@ variable "purge_protection_enabled" {
   description = "Purge Protection enabled for Key Vault."
   type        = bool
   default     = true
+}
+
+variable "retention_days" {
+  description = "Soft delete retention days."
+  type        = number
 }
 
 # network_acls

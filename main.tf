@@ -1,11 +1,12 @@
 locals {
+  enable_logs                = var.enable_logs
   tags                       = var.tags
   name                       = var.name
   location                   = var.location
   rg_name                    = var.rg_name
   log_analytics_workspace_id = var.log_analytics_workspace_id
   sku_name                   = var.sku_name
-  enable_logs                = var.enable_logs
+  retention_days             = var.retention_days
 
   enabled_for_deployment          = var.enabled_for_deployment
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
@@ -41,20 +42,15 @@ resource "azurerm_key_vault" "this" {
 
   sku_name = local.sku_name
 
+  purge_protection_enabled   = local.purge_protection_enabled
+  soft_delete_retention_days = local.retention_days
+
   enabled_for_deployment          = local.enabled_for_deployment
   enabled_for_disk_encryption     = local.enabled_for_disk_encryption
   enabled_for_template_deployment = local.enabled_for_template_deployment
   enable_rbac_authorization       = local.enable_rbac_authorization
-  purge_protection_enabled        = local.purge_protection_enabled
 
   public_network_access_enabled = true
-  # network_acls {
-  #   bypass         = "AzureServices"
-  #   default_action = "Allow"
-  #   virtual_network_subnet_ids = [
-  #     "<subnet_id>",
-  #   ]
-  # }
 
   tags = local.tags
 }
@@ -72,12 +68,16 @@ resource "azurerm_role_assignment" "certifcates_officer" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-# todo
+# todo?
 # resource "azurerm_key_vault_certificate" "ag_cert" {}
 
-# todo - toremove
-resource "azurerm_key_vault_secret" "secret" {
-  name         = "secretname"
-  value        = "secretvalue"
-  key_vault_id = azurerm_key_vault.this.id
-}
+# todo?
+# resource "azurerm_key_vault_secret" "secret" {
+#   name         = "secretname"
+#   value        = "secretvalue"
+#   key_vault_id = azurerm_key_vault.this.id
+
+#   depends_on = [
+#     azurerm_role_assignment.secrets_officer,
+#   ]
+# }
