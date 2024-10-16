@@ -73,10 +73,3 @@ variable "retention_days" {
   description = "Soft delete retention days."
   type        = number
 }
-
-# network_acls
-# variable "allowed_subnet_ids" {
-#   description = "Specifies which subnet_id can bypass the network rules."
-#   type = list(string)
-#   default = []
-# }
