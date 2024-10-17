@@ -68,16 +68,43 @@ resource "azurerm_role_assignment" "certifcates_officer" {
   principal_id         = data.azurerm_client_config.current.object_id
 }
 
-# todo?
-# resource "azurerm_key_vault_certificate" "ag_cert" {}
+resource "azurerm_key_vault_certificate" "this" {
+  name         = "default"
+  key_vault_id = azurerm_key_vault.this.id
 
-# todo?
-# resource "azurerm_key_vault_secret" "secret" {
-#   name         = "secretname"
-#   value        = "secretvalue"
-#   key_vault_id = azurerm_key_vault.this.id
+  certificate_policy {
+    issuer_parameters {
+      name = "Self"
+    }
 
-#   depends_on = [
-#     azurerm_role_assignment.secrets_officer,
-#   ]
-# }
+    key_properties {
+      exportable = true
+      key_size   = 2048
+      key_type   = "RSA"
+      reuse_key  = true
+    }
+
+    lifetime_action {
+      action {
+        action_type = "AutoRenew"
+      }
+
+      trigger {
+        days_before_expiry = 30
+      }
+    }
+
+    secret_properties {
+      content_type = "application/x-pkcs12"
+    }
+
+    x509_certificate_properties {
+      subject            = "CN=example-cert"
+      validity_in_months = 12
+      key_usage = [
+        "keyEncipherment",
+        "digitalSignature",
+      ]
+    }
+  }
+}
