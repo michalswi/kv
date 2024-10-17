@@ -52,6 +52,12 @@ resource "azurerm_key_vault" "this" {
 
   public_network_access_enabled = true
 
+  # to consider:
+  # network_acls {
+  #   default_action = "Deny"
+  #   bypass         = "AzureServices"
+  # }
+
   tags = local.tags
 }
 
