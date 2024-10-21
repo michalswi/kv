@@ -1,3 +1,9 @@
+variable "enable_logs" {
+  description = "Enable Azure Monitor diagnostics."
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "List of tags."
   type        = map(string)
@@ -19,12 +25,6 @@ variable "rg_name" {
   description = "The name of an existing resource group to create the resource in."
   type        = string
   default     = ""
-}
-
-variable "enable_logs" {
-  description = "Enable Azure Monitor diagnostics."
-  type        = bool
-  default     = true
 }
 
 variable "log_analytics_workspace_id" {

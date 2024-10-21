@@ -1,5 +1,6 @@
 locals {
-  enable_logs                = var.enable_logs
+  enable_logs = var.enable_logs
+
   tags                       = var.tags
   name                       = var.name
   location                   = var.location
