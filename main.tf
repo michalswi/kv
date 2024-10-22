@@ -36,7 +36,7 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault
 resource "azurerm_key_vault" "this" {
-  name                = var.name
+  name                = local.name
   location            = local.location
   resource_group_name = local.rg_name
   tenant_id           = data.azurerm_client_config.current.tenant_id
