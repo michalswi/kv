@@ -13,7 +13,6 @@ variable "tags" {
 variable "name" {
   description = "Resource name prefix."
   type        = string
-  default     = "oneadkv"
 }
 
 variable "location" {
@@ -24,7 +23,6 @@ variable "location" {
 variable "rg_name" {
   description = "The name of an existing resource group to create the resource in."
   type        = string
-  default     = ""
 }
 
 variable "log_analytics_workspace_id" {
